@@ -194,7 +194,7 @@ jobs:
           cd homebrew-tap
 
           cat > Formula/${PROJECT}.rb <<EOL
-          class $(echo $PROJECT | perl -pe 's/(^|_｜-)(\w)/\U$2/g') < Formula
+          class $(echo $PROJECT | perl -pe 's/(^|_|-)(\w)/\U$2/g') < Formula
             desc "${DESC}"
             homepage "https://github.com/${REPO}"
             version "${VERSION}"
