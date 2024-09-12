@@ -209,16 +209,19 @@ jobs:
               end
             end
 
-            if Hardware::CPU.intel?
-              bin.install "${PROJECT}-#{version}-x86_64-apple-darwin" => "${PROJECT}"
-            else
-              bin.install "${PROJECT}-#{version}-aarch64-apple-darwin" => "${PROJECT}"
+            def install
+              if Hardware::CPU.intel?
+                bin.install "${PROJECT}-#{version}-x86_64-apple-darwin" => "${PROJECT}"
+              else
+                bin.install "${PROJECT}-#{version}-aarch64-apple-darwin" => "${PROJECT}"
+              end
             end
 
             test do
               system "#{bin}/${PROJECT}", "--version"
             end
           end
+
           EOL
 
           git config user.name github-actions
