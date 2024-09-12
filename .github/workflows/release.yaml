@@ -128,7 +128,7 @@ jobs:
           yum update -y && yum install -y gcc make openssl openssl-devel && \
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && export PATH=\$HOME/.cargo/bin:\$PATH && cd /github/workspace && cargo build --release"
 
-          docker cp centos7-container:/workspace/target/release/${{ env.PROJECT_NAME }} ./dist/${{ env.PROJECT_NAME }}-${{ github.ref_name }}-centos7
+          docker cp centos7-container:/github/workspace/target/release/${{ env.PROJECT_NAME }} ./dist/${{ env.PROJECT_NAME }}-${{ github.ref_name }}-centos7
           docker rm centos7-container
 
       - name: Upload CentOS 7 Release Asset
@@ -209,9 +209,12 @@ jobs:
               end
             end
 
-            def install
-              bin.install "${PROJECT}"
+            if Hardware::CPU.intel?
+              bin.install "${PROJECT}-#{version}-x86_64-apple-darwin" => "${PROJECT}"
+            else
+              bin.install "${PROJECT}-#{version}-aarch64-apple-darwin" => "${PROJECT}"
             end
+
             test do
               system "#{bin}/${PROJECT}", "--version"
             end
