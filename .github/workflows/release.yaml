@@ -118,17 +118,15 @@ jobs:
       - name: Build on CentOS 7
         if: matrix.os == 'ubuntu-latest'
         run: |
-          docker run --name centos7-container -v ${{ github.workspace }}:/workspace -w /workspace centos:7 \
-          /bin/bash -c "echo '[base]' > /etc/yum.repos.d/CentOS-Base.repo && \
-          echo 'name=CentOS-7 - Base' >> /etc/yum.repos.d/CentOS-Base.repo && \
-          echo 'baseurl=http://vault.centos.org/centos/7/os/x86_64/' >> /etc/yum.repos.d/CentOS-Base.repo && \
-          echo 'gpgcheck=1' >> /etc/yum.repos.d/CentOS-Base.repo && \
-          echo 'enabled=1' >> /etc/yum.repos.d/CentOS-Base.repo && \
-          echo 'gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7' >> /etc/yum.repos.d/CentOS-Base.repo && \
+          docker run --name centos7-container -v $GITHUB_WORKSPACE:/github/workspace -w /github/workspace centos:7 \
+          /bin/bash -c "echo '[base]' > /etc/yum.repos.d/CentOS-Base.repo; \
+          echo 'name=CentOS-7 - Base' >> /etc/yum.repos.d/CentOS-Base.repo; \
+          echo 'baseurl=http://vault.centos.org/centos/7/os/x86_64/' >> /etc/yum.repos.d/CentOS-Base.repo; \
+          echo 'gpgcheck=1' >> /etc/yum.repos.d/CentOS-Base.repo; \
+          echo 'enabled=1' >> /etc/yum.repos.d/CentOS-Base.repo; \
+          echo 'gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7' >> /etc/yum.repos.d/CentOS-Base.repo; \
           yum update -y && yum install -y gcc make openssl openssl-devel && \
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-          source $HOME/.cargo/env && \
-          cargo build --release"
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && export PATH=\$HOME/.cargo/bin:\$PATH && cd /github/workspace && cargo build --release"
 
           docker cp centos7-container:/workspace/target/release/${{ env.PROJECT_NAME }} ./dist/${{ env.PROJECT_NAME }}-${{ github.ref_name }}-centos7
           docker rm centos7-container

@@ -1,3 +1,11 @@
+## Installation
+
+### Homebrew
+```
+brew install eric9n/tap/ncbi_dl
+```
+
+
 ### Build the Projects
 
 First, clone this repository to your local machine:
