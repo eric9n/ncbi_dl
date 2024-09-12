@@ -1,12 +1,12 @@
 [package]
 name = "ncbi_dl"
-version = "0.1.9"
+version = "0.1.10"
 edition = "2021"
 authors = ["eric9n@gmail.com"]
 license = "MIT"
-repository = "https://github.com/eric9n/Kun-peng"
+repository = "https://github.com/eric9n/ncbi_dl"
 keywords = ["bioinformatics", "metagenomics", "microbiome", "ncbi"]
-description = "download ncbi genome file"
+description = "A command-line tool for downloading and managing NCBI data"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
