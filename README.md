@@ -4,7 +4,7 @@ First, clone this repository to your local machine:
 
 ``` sh
 git clone https://github.com/eric9n/ncbi_dl.git
-cd kun_peng
+cd ncbi_dl
 ```
 
 Ensure that both projects are built. You can do this by running the following command from the root of the workspace:
@@ -13,7 +13,7 @@ Ensure that both projects are built. You can do this by running the following co
 cargo build --release
 ```
 
-### Run the `ncbi` Example
+### Run the `ncbi_dl` Example
 
 Run the example script in the ncbi project to download the necessary files. Execute the following command from the root of the workspace:
 

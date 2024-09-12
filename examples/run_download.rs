@@ -3,10 +3,7 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
-    let workspace_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .unwrap()
-        .to_path_buf();
+    let workspace_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
 
     // Run the NCBI binary to download files
     let ncbi_binary = workspace_root.join("target/release/ncbi_dl");
