@@ -10,6 +10,14 @@ description = "A command-line tool for downloading and managing NCBI data"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[profile.release]
+lto = true
+opt-level = "s"          # 或者 "z"
+debug-assertions = false
+# panic = 'abort'
+codegen-units = 1 # Compile crates one after another so the compiler can optimize better
+strip = true      # Remove debug symbols
+
 [dependencies]
 reqwest = { version = "0.12", features = ["stream", "multipart", "gzip"] }
 tokio = { version = "1", features = ["full"] }
